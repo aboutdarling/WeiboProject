@@ -1,0 +1,54 @@
+# Files ignored
+Thumbs.db
+*.obj
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.sln.docstates
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.tmp
+#*.dll*
+#!*EF.CodeGenerators.dll
+
+# Folders ignored
+_[Oo]utput/
+[Bb]in/
+[Dd]ebug*/
+[Rr]elease*/
+obj/
+_ReSharper*/
+[Tt]est[Rr]esult*
+
+# NuGet files
+packages/
+*.nupkg
+
+# NCrunch files
+*.ncrunchsolution
+*.ncrunchproject
+*_NCrunch_*/
+
+# scripts, styles output sass-cache folder
+.sass-cache/
+_scripts/
+_styles/
+.idea/
+node_modules/
+
+# publish xml files
+*.Publish.xml
+*.dll0
