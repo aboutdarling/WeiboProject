@@ -11,6 +11,7 @@ namespace Weibo.DataAccess
 {
     //comment2
     // comments 3
+    //commentd 4
     public class WeiboDataService
     {
         public const string ConnectString = @"Server=.\SQLExpress;database =MyTestDB;Integrated Security=true;";
