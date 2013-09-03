@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Weibo.DataAccess
 {
-    //test version 1
+
     public class WeiboDataService
     {
         public const string ConnectString = @"Server=.\SQLExpress;database =MyTestDB;Integrated Security=true;";
