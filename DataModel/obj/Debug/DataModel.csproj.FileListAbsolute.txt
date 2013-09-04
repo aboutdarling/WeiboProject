@@ -3,3 +3,8 @@ D:\Dev\C#\ReadSQL\SQL Operator\DataModel\bin\Debug\DataModel.dll
 D:\Dev\C#\ReadSQL\SQL Operator\DataModel\bin\Debug\DataModel.pdb
 D:\Dev\C#\ReadSQL\SQL Operator\DataModel\obj\Debug\DataModel.dll
 D:\Dev\C#\ReadSQL\SQL Operator\DataModel\obj\Debug\DataModel.pdb
+H:\WeiboProject\DataModel\bin\Debug\DataModel.dll
+H:\WeiboProject\DataModel\bin\Debug\DataModel.pdb
+H:\WeiboProject\DataModel\obj\Debug\DataModel.csprojResolveAssemblyReference.cache
+H:\WeiboProject\DataModel\obj\Debug\DataModel.dll
+H:\WeiboProject\DataModel\obj\Debug\DataModel.pdb

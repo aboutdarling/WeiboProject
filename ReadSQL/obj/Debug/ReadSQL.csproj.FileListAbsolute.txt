@@ -11,3 +11,10 @@ D:\Dev\C#\ReadSQL\SQL Operator\ReadSQL\bin\Debug\WeiboDataService.pdb
 H:\WeiboProject\ReadSQL\bin\Debug\ReadSQL.exe.config
 H:\WeiboProject\ReadSQL\obj\Debug\ReadSQL.exe
 H:\WeiboProject\ReadSQL\obj\Debug\ReadSQL.pdb
+H:\WeiboProject\ReadSQL\bin\Debug\ReadSQL.exe
+H:\WeiboProject\ReadSQL\bin\Debug\ReadSQL.pdb
+H:\WeiboProject\ReadSQL\bin\Debug\DataModel.dll
+H:\WeiboProject\ReadSQL\bin\Debug\WeiboDataService.dll
+H:\WeiboProject\ReadSQL\bin\Debug\DataModel.pdb
+H:\WeiboProject\ReadSQL\bin\Debug\WeiboDataService.pdb
+H:\WeiboProject\ReadSQL\obj\Debug\ReadSQL.csprojResolveAssemblyReference.cache

@@ -16,31 +16,7 @@ namespace ReadSQL
 {
     class Program
     {
-        //private static void GetSqlData(out SqlDataReader reader)
-        //{
-        //    string connectString = @"Server=.\SQLExpress;database =MyTestDB;Integrated Security=true;";
-        //    string queryString = "select WeiboDescription,CreatedBy,CreatedOn,likerate from MyWeibo";
-        //    //            string paramValue = "add my description here";
-
-        //    using (SqlConnection conn = new SqlConnection(connectString))
-        //    {
-        //        SqlCommand command = new SqlCommand(queryString, conn);
-        //        //command.Parameters.AddWithValue("@WeiboDescription", paramValue);
-
-        //        try
-        //        {
-        //            conn.Open();
-        //            reader = command.ExecuteReader();
-        //        }
-
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine(ex.Message);
-
-        //        }
-        //    }
-        //}
-
+    
         private static void OutputData(List<WeiboData> weiboDataList)
         {
             foreach (var weiboData in weiboDataList)
@@ -59,23 +35,8 @@ namespace ReadSQL
         private static bool AddData()
         {
             WeiboDataService dataModel = new WeiboDataService();
-            WeiboData myData = new WeiboData();
-
-//            myData.weiboID = 
-            Console.WriteLine("please input description:");
-            myData.WeiboDescription = Console.ReadLine();
-
-            Console.WriteLine("Please input the imageUrl");
-//            myData.ImageUrl = "http://ww3.sinaimg.cn/thumbnail/5487fa6cgw1e87rrax91ej20p00gowfa.jpg";
-            myData.ImageUrl = Console.ReadLine();
-
-            Console.WriteLine("Please input the Author");
-            myData.CreatedBy = Console.ReadLine();
-
-            myData.CreatedOn = DateTime.Now;
- //           myData.LikeRate = "default";
-
-            if (dataModel.InsertData(myData))
+            
+            if (dataModel.InsertData())
             {
                 Console.WriteLine("add data succeed");
                 return true;
@@ -86,44 +47,119 @@ namespace ReadSQL
                 return false;
             }
         }
-        static void Main(string[] args)
+        private static bool DeleteData()
+        {
+            WeiboDataService dataModel = new WeiboDataService();
+            WeiboData myData = new WeiboData();
+            Console.WriteLine("please input Data ID:");
+            long checkdata;
+            if (long.TryParse(Console.ReadLine(), out checkdata))
+            {
+                myData.weiboID = checkdata;
+                if (dataModel.DeleteData(myData.weiboID))
+                {
+                    Console.WriteLine("delete success");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("delete failed");
+                    return false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("please input Data ID here, such as 10008");
+                return false;
+            }
+
+        }
+        private static bool UpdateData()
+        {
+            WeiboDataService dataModel = new WeiboDataService();
+            WeiboData myData = new WeiboData();
+            Console.WriteLine("please input Data ID:");
+            long checkdata;
+            if (long.TryParse(Console.ReadLine(), out checkdata))
+            {
+                myData.weiboID = checkdata;
+                if (dataModel.UpdateData(myData.weiboID))
+                {
+                    Console.WriteLine("Update success");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Update failed");
+                    return false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("please input Data ID here, such as 10008");
+                return false;
+            }
+
+        }
+
+        private static bool ContinueValidation()
+        {
+            Console.WriteLine("Do you want to quit? Y/N");
+            string input2 = Console.ReadLine();
+            if (input2 == "Y" || input2 == "y")
+            {
+
+                return false;
+            }
+            else
+                return true;     
+        }
+        private static void ExecuteInput()
         {
             WeiboDataService dataModel = new WeiboDataService();
             var weiboDataList = dataModel.GetData();
-            bool a = true;
-            while (a)
+            Console.WriteLine("What do you want to do? Search Data/Add Data/Delete Data/Update Data?\nPlease input S/A/D/U");
+            string userInput = Console.ReadLine();
+            switch (userInput)
             {
-                Console.WriteLine("What do you want to do? Search Data or Add Data? S/A");
-                string userInput = Console.ReadLine();
-                switch (userInput)
-                {
-                    case "A": 
-                       AddData();
-                        break;
-                    case "a":
-                        AddData();
-                        break;
-                    case "S":
-                        weiboDataList = dataModel.GetData();
-                        OutputData(weiboDataList);
-                        break;
-                    case "s":
-                        weiboDataList = dataModel.GetData();
-                        OutputData(weiboDataList);
-                        break;
-                    default:
-                        Console.WriteLine("input wrong value, please input S or A");
-                        break;
-                }
-                Console.WriteLine("Do you want to quit? Y/N");
-                string input2 = Console.ReadLine();
-                if (input2 == "Y" || input2 == "y")
-                {
-                   
-                    a = false;
-                }
-                else
-                    a = true;                
+                case "A":
+                    AddData();
+                    break;
+                case "a":
+                    AddData();
+                    break;
+                case "S":
+                    weiboDataList = dataModel.GetData();
+                    OutputData(weiboDataList);
+                    break;
+                case "s":
+                    weiboDataList = dataModel.GetData();
+                    OutputData(weiboDataList);
+                    break;
+                case "D":
+                    DeleteData();
+                    break;
+                case "d":
+                    DeleteData();
+                    break;
+                case "U":
+                    UpdateData();
+                    break;
+                case "u":
+                    UpdateData();
+                    break;
+                default:
+                    Console.WriteLine("input wrong value, please input S/A/D/M");
+                    break;
+            }
+        }
+        static void Main(string[] args)
+        {
+            ExecuteInput();
+            while (ContinueValidation())
+            {
+                ExecuteInput();
+                          
             }
               
         }

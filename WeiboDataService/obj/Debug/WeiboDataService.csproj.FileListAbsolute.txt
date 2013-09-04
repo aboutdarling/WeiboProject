@@ -5,3 +5,10 @@ D:\Dev\C#\ReadSQL\SQL Operator\WeiboDataService\bin\Debug\DataModel.pdb
 D:\Dev\C#\ReadSQL\SQL Operator\WeiboDataService\obj\Debug\WeiboDataService.dll
 D:\Dev\C#\ReadSQL\SQL Operator\WeiboDataService\obj\Debug\WeiboDataService.pdb
 D:\Dev\C#\ReadSQL\SQL Operator\WeiboDataService\obj\Debug\WeiboDataService.csprojResolveAssemblyReference.cache
+H:\WeiboProject\WeiboDataService\bin\Debug\WeiboDataService.dll
+H:\WeiboProject\WeiboDataService\bin\Debug\WeiboDataService.pdb
+H:\WeiboProject\WeiboDataService\bin\Debug\DataModel.dll
+H:\WeiboProject\WeiboDataService\bin\Debug\DataModel.pdb
+H:\WeiboProject\WeiboDataService\obj\Debug\WeiboDataService.csprojResolveAssemblyReference.cache
+H:\WeiboProject\WeiboDataService\obj\Debug\WeiboDataService.dll
+H:\WeiboProject\WeiboDataService\obj\Debug\WeiboDataService.pdb

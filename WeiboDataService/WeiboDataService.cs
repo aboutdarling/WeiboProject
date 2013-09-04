@@ -31,9 +31,9 @@ namespace Weibo.DataAccess
         {
             Initialize();
             //using (SqlConnection Connection = new SqlConnection(ConnectString))
-   
+
             {
-                 //command.Parameters.AddWithValue("@WeiboDescription", paramValue);
+                //command.Parameters.AddWithValue("@WeiboDescription", paramValue);
 
                 try
                 {
@@ -47,10 +47,60 @@ namespace Weibo.DataAccess
                 }
             }
         }
-        public  List<WeiboData> GetData()
+        private bool ExcecuteSQLQuery(string queryString)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                try
+                {
+                    command.CommandText = queryString;
+                    command.Connection = Connection;
+                    if (command.ExecuteNonQuery() <= 0)
+                    {
+                        Connection.Close();
+                        Connection.Dispose();
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Connection.Close();
+                    Connection.Dispose();
+                    return false;
+
+                }
+            }
+        }
+        /* get the data from input 
+         */
+        private WeiboData GetInputData()
+        {
+            WeiboData myData = new WeiboData();
+
+            //            myData.weiboID = 
+            Console.WriteLine("please input description:");
+            myData.WeiboDescription = Console.ReadLine();
+
+            Console.WriteLine("Please input the imageUrl");
+            //            myData.ImageUrl = "http://ww3.sinaimg.cn/thumbnail/5487fa6cgw1e87rrax91ej20p00gowfa.jpg";
+            myData.ImageUrl = Console.ReadLine();
+
+            Console.WriteLine("Please input the Author");
+            myData.CreatedBy = Console.ReadLine();
+
+            myData.CreatedOn = DateTime.Now;
+            //           myData.LikeRate = "default";
+            return myData;
+        }
+        public List<WeiboData> GetData()
         {
             List<WeiboData> weiboDataList = new List<WeiboData>();
-  
+
             if (ConnectServer())
             {
                 SqlCommand command = new SqlCommand(QueryString, Connection);
@@ -74,45 +124,70 @@ namespace Weibo.DataAccess
             return weiboDataList;
 
         }
-        public  bool InsertData(WeiboData addData)
+        public bool InsertData()
         {
-           
-          //string   insertString = "insert into MyWeibo values ('"+addData.WeiboDescription+"','"+addData.ImageUrl+"','"
-          //    +addData.CreatedBy+"','"+addData.CreatedOn+"',"+addData.LikeRate+")";
-          string insertFields = "WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate";
-          string insertString = "insert into MyWeibo ({0}) values ('{1}','{2}','{3}','{4}','{5}')";
-          string insertQueryString = string.Format(insertString,insertFields,  addData.WeiboDescription, addData.ImageUrl, addData.CreatedBy, addData.CreatedOn, addData.LikeRate);
-          if (ConnectServer())
-          {
-              using (SqlCommand command = new SqlCommand())
-              {
-                  try
-                  {
-                      command.CommandText = insertQueryString;
-                      command.Connection = Connection;
-                      command.ExecuteNonQuery();
-                      Connection.Close();
-                      Connection.Dispose();
-                      return true;
-                  }
-                  catch (Exception ex)
-                  {
-                      Console.WriteLine(ex.Message);
-                      Connection.Close();
-                      Connection.Dispose();
-                      return false;
+            WeiboData addData = GetInputData();
 
-                  }
-              }
-          }
-          else
-          {
-              return false;
-          }
-                   
+            string insertFields = "WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate";
+            string insertString = "insert into MyWeibo ({0}) values ('{1}','{2}','{3}','{4}','{5}')";
+            string insertQueryString = string.Format(insertString, insertFields, addData.WeiboDescription, addData.ImageUrl, addData.CreatedBy, addData.CreatedOn, addData.LikeRate);
+            if (ConnectServer())
+            {
+                if (ExcecuteSQLQuery(insertQueryString))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
         }
-    
+        public bool DeleteData(long weiboID)
+        {
+            string deleteString = "Delete MyWeibo where WeiboID = {0}";
+            string deleteQueryString = string.Format(deleteString, weiboID);
+            if (ConnectServer())
+            {
+                if (ExcecuteSQLQuery(deleteString))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            { return false; }
+        }
+        public bool UpdateData(long weiboId)
+        {
+            WeiboData updateData = GetInputData();
+            string updateString = "UPDATE MyWeibo SET WeiboDescription = '{0}',ImageUrl = '{1}',CreatedBy = '{2}',CreatedOn='{3}',likerate ='{4}' WHERE WeiboID ='{5}'";
+            string updateQueryString = string.Format(updateString,updateData.WeiboDescription, updateData.ImageUrl, updateData.CreatedBy, updateData.CreatedOn, updateData.LikeRate,weiboId);
+            if (ConnectServer())
+            {
+                if (ExcecuteSQLQuery(updateQueryString))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            { return false; }
+
+        }
     }
 }
-
     
