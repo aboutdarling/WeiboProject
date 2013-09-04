@@ -148,10 +148,10 @@ namespace Weibo.DataAccess
             else
             { return false; }
         }
-        public bool UpdateData(long weiboId,WeiboData updateData)
+        public bool UpdateData(WeiboData updateData)
         {
             string updateString = "UPDATE MyWeibo SET WeiboDescription = '{0}',ImageUrl = '{1}',CreatedBy = '{2}',CreatedOn='{3}',likerate ='{4}' WHERE WeiboID ='{5}'";
-            string updateQueryString = string.Format(updateString,updateData.WeiboDescription, updateData.ImageUrl, updateData.CreatedBy, updateData.CreatedOn, updateData.LikeRate,weiboId);
+            string updateQueryString = string.Format(updateString,updateData.WeiboDescription, updateData.ImageUrl, updateData.CreatedBy, updateData.CreatedOn, updateData.LikeRate,updateData.weiboID);
             if (ConnectServer())
             {
                 if (ExcecuteSQLQuery(updateQueryString))

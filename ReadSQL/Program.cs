@@ -101,8 +101,9 @@ namespace ReadSQL
             long checkdata;
             if (long.TryParse(Console.ReadLine(), out checkdata))
             {
+                myData = GetInputData();
                 myData.weiboID = checkdata;
-                if (dataModel.UpdateData(myData.weiboID, GetInputData()))
+                if (dataModel.UpdateData(myData))
                 {
                     Console.WriteLine("Update success");
                     return true;
