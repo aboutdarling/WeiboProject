@@ -78,25 +78,7 @@ namespace Weibo.DataAccess
         }
         /* get the data from input 
          */
-        private WeiboData GetInputData()
-        {
-            WeiboData myData = new WeiboData();
-
-            //            myData.weiboID = 
-            Console.WriteLine("please input description:");
-            myData.WeiboDescription = Console.ReadLine();
-
-            Console.WriteLine("Please input the imageUrl");
-            //            myData.ImageUrl = "http://ww3.sinaimg.cn/thumbnail/5487fa6cgw1e87rrax91ej20p00gowfa.jpg";
-            myData.ImageUrl = Console.ReadLine();
-
-            Console.WriteLine("Please input the Author");
-            myData.CreatedBy = Console.ReadLine();
-
-            myData.CreatedOn = DateTime.Now;
-            //           myData.LikeRate = "default";
-            return myData;
-        }
+      
         public List<WeiboData> GetData()
         {
             List<WeiboData> weiboDataList = new List<WeiboData>();
@@ -124,9 +106,8 @@ namespace Weibo.DataAccess
             return weiboDataList;
 
         }
-        public bool InsertData()
+        public bool InsertData(WeiboData addData)
         {
-            WeiboData addData = GetInputData();
 
             string insertFields = "WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate";
             string insertString = "insert into MyWeibo ({0}) values ('{1}','{2}','{3}','{4}','{5}')";
@@ -167,9 +148,8 @@ namespace Weibo.DataAccess
             else
             { return false; }
         }
-        public bool UpdateData(long weiboId)
+        public bool UpdateData(long weiboId,WeiboData updateData)
         {
-            WeiboData updateData = GetInputData();
             string updateString = "UPDATE MyWeibo SET WeiboDescription = '{0}',ImageUrl = '{1}',CreatedBy = '{2}',CreatedOn='{3}',likerate ='{4}' WHERE WeiboID ='{5}'";
             string updateQueryString = string.Format(updateString,updateData.WeiboDescription, updateData.ImageUrl, updateData.CreatedBy, updateData.CreatedOn, updateData.LikeRate,weiboId);
             if (ConnectServer())

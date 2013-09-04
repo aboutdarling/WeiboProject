@@ -31,12 +31,31 @@ namespace ReadSQL
             }
 
         }
+        private static  WeiboData GetInputData()
+        {
+            WeiboData myData = new WeiboData();
+
+            //            myData.weiboID = 
+            Console.WriteLine("please input description:");
+            myData.WeiboDescription = Console.ReadLine();
+
+            Console.WriteLine("Please input the imageUrl");
+            //            myData.ImageUrl = "http://ww3.sinaimg.cn/thumbnail/5487fa6cgw1e87rrax91ej20p00gowfa.jpg";
+            myData.ImageUrl = Console.ReadLine();
+
+            Console.WriteLine("Please input the Author");
+            myData.CreatedBy = Console.ReadLine();
+
+            myData.CreatedOn = DateTime.Now;
+            //           myData.LikeRate = "default";
+            return myData;
+        }
         
         private static bool AddData()
         {
             WeiboDataService dataModel = new WeiboDataService();
-            
-            if (dataModel.InsertData())
+
+            if (dataModel.InsertData(GetInputData()))
             {
                 Console.WriteLine("add data succeed");
                 return true;
@@ -83,7 +102,7 @@ namespace ReadSQL
             if (long.TryParse(Console.ReadLine(), out checkdata))
             {
                 myData.weiboID = checkdata;
-                if (dataModel.UpdateData(myData.weiboID))
+                if (dataModel.UpdateData(myData.weiboID, GetInputData()))
                 {
                     Console.WriteLine("Update success");
                     return true;
