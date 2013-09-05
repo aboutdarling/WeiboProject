@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Data;
-//using System.Data.ADO;
 using System.Data.SqlClient;
 using System.Drawing;
 using DataModel;
@@ -35,22 +34,20 @@ namespace ReadSQL
         {
             WeiboData myData = new WeiboData();
 
-            //            myData.weiboID = 
+
             Console.WriteLine("please input description:");
             myData.WeiboDescription = Console.ReadLine();
 
             Console.WriteLine("Please input the imageUrl");
-            //            myData.ImageUrl = "http://ww3.sinaimg.cn/thumbnail/5487fa6cgw1e87rrax91ej20p00gowfa.jpg";
             myData.ImageUrl = Console.ReadLine();
 
             Console.WriteLine("Please input the Author");
             myData.CreatedBy = Console.ReadLine();
 
             myData.CreatedOn = DateTime.Now;
-            //           myData.LikeRate = "default";
+            
             return myData;
-        }
-        
+        }        
         private static bool AddData()
         {
             WeiboDataService dataModel = new WeiboDataService();
@@ -121,7 +118,6 @@ namespace ReadSQL
             }
 
         }
-
         private static bool ContinueValidation()
         {
             Console.WriteLine("Do you want to quit? Y/N");

@@ -9,31 +9,29 @@ using System.Data.SqlClient;
 
 namespace Weibo.DataAccess
 {
-    //comment2
-    // comments 3
-    //commentd 4
+
     public class WeiboDataService
     {
+        #region const string
         public const string ConnectString = @"Server=.\SQLExpress;database =MyTestDB;Integrated Security=true;";
         public const string QueryString = "select weiboID,WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate from MyWeibo";
-        public SqlConnection Connection { get; set; }
-        public WeiboDataService()
-        {
-            Initialize();
-        }
+        public const string deleteString = "Delete MyWeibo where WeiboID = {0}";
+        public const string insertFields = "WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate";
+        public const string insertString = "insert into MyWeibo ({0}) values ('{1}','{2}','{3}','{4}','{5}')";
+
+        #endregion
+
+        #region private method
+
         private void Initialize()
         {
-            //ConnectString = @"Server=.\SQLExpress;database =MyTestDB;Integrated Security=true;";
-            //QueryString = "select WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate from MyWeibo";
             Connection = new SqlConnection(ConnectString);
         }
         private bool ConnectServer()
         {
             Initialize();
-            //using (SqlConnection Connection = new SqlConnection(ConnectString))
 
             {
-                //command.Parameters.AddWithValue("@WeiboDescription", paramValue);
 
                 try
                 {
@@ -76,9 +74,15 @@ namespace Weibo.DataAccess
                 }
             }
         }
-        /* get the data from input 
-         */
-      
+
+        #endregion
+
+        #region public method
+        public SqlConnection Connection { get; set; }
+        public WeiboDataService()
+        {
+            Initialize();
+        }    
         public List<WeiboData> GetData()
         {
             List<WeiboData> weiboDataList = new List<WeiboData>();
@@ -109,8 +113,6 @@ namespace Weibo.DataAccess
         public bool InsertData(WeiboData addData)
         {
 
-            string insertFields = "WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate";
-            string insertString = "insert into MyWeibo ({0}) values ('{1}','{2}','{3}','{4}','{5}')";
             string insertQueryString = string.Format(insertString, insertFields, addData.WeiboDescription, addData.ImageUrl, addData.CreatedBy, addData.CreatedOn, addData.LikeRate);
             if (ConnectServer())
             {
@@ -131,7 +133,6 @@ namespace Weibo.DataAccess
         }
         public bool DeleteData(long weiboID)
         {
-            string deleteString = "Delete MyWeibo where WeiboID = {0}";
             string deleteQueryString = string.Format(deleteString, weiboID);
             if (ConnectServer())
             {
@@ -168,6 +169,7 @@ namespace Weibo.DataAccess
             { return false; }
 
         }
+        #endregion
     }
 }
     
