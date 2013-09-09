@@ -51,6 +51,7 @@ namespace ReadSQL
         private static bool AddData()
         {
             WeiboDataService dataModel = new WeiboDataService();
+ //           WeiboDataService dataModel = new 
 
             if (dataModel.InsertData(GetInputData()))
             {
