@@ -51,35 +51,6 @@ namespace Weibo.DataAccess
                 }
             }
         }
-        private bool ExcecuteSQLQuery(string queryString)
-        {
-            using (SqlCommand command = new SqlCommand())
-            {
-                try
-                {
-                    command.CommandText = queryString;
-                    command.Connection = Connection;
-                    if (command.ExecuteNonQuery() <= 0)
-                    {
-                        Connection.Close();
-                        Connection.Dispose();
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Connection.Close();
-                    Connection.Dispose();
-                    return false;
-
-                }
-            }
-        }
 
         #endregion
 
@@ -114,7 +85,6 @@ namespace Weibo.DataAccess
             Connection.Dispose();
             return weiboDataList;
         }
-
         public bool InsertData(WeiboData addData)
         {
            
@@ -133,11 +103,11 @@ namespace Weibo.DataAccess
                 {
                     Connection.Close();
                     Connection.Dispose();
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
             else
@@ -158,11 +128,11 @@ namespace Weibo.DataAccess
                 {
                     Connection.Close();
                     Connection.Dispose();
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
 
             }
@@ -185,11 +155,11 @@ namespace Weibo.DataAccess
                 {
                     Connection.Close();
                     Connection.Dispose();
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
 
             }
