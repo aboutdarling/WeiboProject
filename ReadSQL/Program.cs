@@ -15,7 +15,7 @@ namespace ReadSQL
 {
     class Program
     {
-    
+        private static IWeiboDataService dataModel = new WeiboDataService();
         private static void OutputData(IList<WeiboData> weiboDataList)
         {
             foreach (var weiboData in weiboDataList)
@@ -50,9 +50,7 @@ namespace ReadSQL
         }        
         private static bool AddData()
         {
-            WeiboDataService dataModel = new WeiboDataService();
- //           WeiboDataService dataModel = new 
-
+     
             if (dataModel.InsertData(GetInputData()))
             {
                 Console.WriteLine("add data succeed");
@@ -65,9 +63,8 @@ namespace ReadSQL
             }
         }
         private static bool DeleteData()
-        {
-            WeiboDataService dataModel = new WeiboDataService();
-            WeiboData myData = new WeiboData();
+        {            
+        WeiboData myData = new WeiboData();
             Console.WriteLine("please input Data ID:");
             long checkdata;
             if (long.TryParse(Console.ReadLine(), out checkdata))
@@ -93,7 +90,7 @@ namespace ReadSQL
         }
         private static bool UpdateData()
         {
-            WeiboDataService dataModel = new WeiboDataService();
+     
             WeiboData myData = new WeiboData();
             Console.WriteLine("please input Data ID:");
             long checkdata;
@@ -134,7 +131,7 @@ namespace ReadSQL
         }
         private static void ExecuteInput()
         {
-            WeiboDataService dataModel = new WeiboDataService();
+
             var weiboDataList = dataModel.GetData();
             Console.WriteLine("What do you want to do? Search Data/Add Data/Delete Data/Update Data?\nPlease input S/A/D/U");
             string userInput = Console.ReadLine();
@@ -173,6 +170,7 @@ namespace ReadSQL
         }
         static void Main(string[] args)
         {
+   
             ExecuteInput();
             while (ContinueValidation())
             {

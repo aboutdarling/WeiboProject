@@ -47,7 +47,7 @@ namespace Weibo.DataAccess
                 }
             }
         }
-        private void CommandAddParameter(SqlCommand command, WeiboData data)
+        private void CommandAddParameter( SqlCommand command, WeiboData data)
         {
             command.Parameters.Add("@weiboDescription", SqlDbType.NVarChar, 140).Value = data.WeiboDescription;
             command.Parameters.Add("@imageUrl", SqlDbType.NVarChar, 380).Value = data.ImageUrl;
