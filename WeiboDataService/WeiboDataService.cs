@@ -16,7 +16,8 @@ namespace Weibo.DataAccess
         #region const string
         public const string ConnectString = @"Server=.\SQLExpress;database =MyTestDB;Integrated Security=true;";
         public const string QueryString = "select weiboID,WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate from MyWeibo";
-        public const string ProcedureName = "query_MyWeibo";
+        public const string QueryProcedureName = "query_MyWeibo";
+        public const string InsertProcedureName = "insertData_MyWeibo";
         public const string deleteString = "Delete MyWeibo where WeiboID = {0}";
         public const string insertFields = "WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate";
         public const string insertString = "insert into MyWeibo ({0}) values ('{1}','{2}','{3}','{4}','{5}')";
@@ -90,7 +91,7 @@ namespace Weibo.DataAccess
             List<WeiboData> weiboDataList = new List<WeiboData>();
             if (ConnectServer())
             {
-                SqlCommand command = new SqlCommand(ProcedureName, Connection);
+                SqlCommand command = new SqlCommand(QueryProcedureName, Connection);
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
@@ -138,7 +139,7 @@ namespace Weibo.DataAccess
             return weiboDataList;
 
         }
-        public bool InsertData(WeiboData addData)
+        public bool InsertData2(WeiboData addData)
         {
 
             string insertQueryString = string.Format(insertString, insertFields, addData.WeiboDescription, addData.ImageUrl, addData.CreatedBy, addData.CreatedOn, addData.LikeRate);
@@ -159,19 +160,32 @@ namespace Weibo.DataAccess
             }
 
         }
-        public bool InsertData2(WeiboData addData)
+        public bool InsertData(WeiboData addData)
         {
 
             string insertQueryString = string.Format(insertString, insertFields, addData.WeiboDescription, addData.ImageUrl, addData.CreatedBy, addData.CreatedOn, addData.LikeRate);
+            
             if (ConnectServer())
             {
-                if (ExcecuteSQLQuery(insertQueryString))
+                SqlCommand command = new SqlCommand(InsertProcedureName, Connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@weiboDescription", SqlDbType.NVarChar, 140).Value = addData.WeiboDescription;
+                command.Parameters.Add("@imageUrl", SqlDbType.NVarChar, 380).Value = addData.ImageUrl;
+                command.Parameters.Add("@createdBy", SqlDbType.NVarChar, 40).Value = addData.CreatedBy;
+                command.Parameters.Add("@createdOn", SqlDbType.DateTime).Value = addData.CreatedOn;
+                command.Parameters.Add("@likerate", SqlDbType.Int).Value = addData.LikeRate;
+                
+  //              long weiboID = (long)command.Parameters["@weiboID"].Value;
+
+                if (command.ExecuteNonQuery() <= 0)
                 {
-                    return true;
+                    Connection.Close();
+                    Connection.Dispose();
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
             else
