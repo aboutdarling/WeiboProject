@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataModel;
+using System.Data;
 using System.Data.SqlClient;
 
 
 namespace Weibo.DataAccess
 {
 
-    public class WeiboDataService
+    public class WeiboDataService : IWeiboDataService
     {
         #region const string
         public const string ConnectString = @"Server=.\SQLExpress;database =MyTestDB;Integrated Security=true;";
         public const string QueryString = "select weiboID,WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate from MyWeibo";
+        public const string ProcedureName = "query_MyWeibo";
         public const string deleteString = "Delete MyWeibo where WeiboID = {0}";
         public const string insertFields = "WeiboDescription,ImageUrl,CreatedBy,CreatedOn,likerate";
         public const string insertString = "insert into MyWeibo ({0}) values ('{1}','{2}','{3}','{4}','{5}')";
@@ -82,9 +84,35 @@ namespace Weibo.DataAccess
         public WeiboDataService()
         {
             Initialize();
-        }    
-        public List<WeiboData> GetData()
+        }
+        public IList<WeiboData> GetData()
         {
+            List<WeiboData> weiboDataList = new List<WeiboData>();
+            if (ConnectServer())
+            {
+                SqlCommand command = new SqlCommand(ProcedureName, Connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    WeiboData currentData = new WeiboData();
+                    currentData.weiboID = int.Parse(reader[0].ToString());
+                    currentData.WeiboDescription = reader[1].ToString();
+                    currentData.ImageUrl = reader[2].ToString();
+                    currentData.CreatedBy = reader[3].ToString();
+                    currentData.CreatedOn = Convert.ToDateTime(reader[4]);
+                    currentData.LikeRate = int.Parse(reader[5].ToString());
+                    weiboDataList.Add(currentData);
+                }
+                reader.Close();
+            }
+            Connection.Close();
+            Connection.Dispose();
+            return weiboDataList;
+        }
+        public IList<WeiboData> GetData2() //old method
+        {
+            
             List<WeiboData> weiboDataList = new List<WeiboData>();
 
             if (ConnectServer())
@@ -111,6 +139,27 @@ namespace Weibo.DataAccess
 
         }
         public bool InsertData(WeiboData addData)
+        {
+
+            string insertQueryString = string.Format(insertString, insertFields, addData.WeiboDescription, addData.ImageUrl, addData.CreatedBy, addData.CreatedOn, addData.LikeRate);
+            if (ConnectServer())
+            {
+                if (ExcecuteSQLQuery(insertQueryString))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public bool InsertData2(WeiboData addData)
         {
 
             string insertQueryString = string.Format(insertString, insertFields, addData.WeiboDescription, addData.ImageUrl, addData.CreatedBy, addData.CreatedOn, addData.LikeRate);

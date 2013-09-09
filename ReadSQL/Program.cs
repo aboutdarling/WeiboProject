@@ -16,7 +16,7 @@ namespace ReadSQL
     class Program
     {
     
-        private static void OutputData(List<WeiboData> weiboDataList)
+        private static void OutputData(IList<WeiboData> weiboDataList)
         {
             foreach (var weiboData in weiboDataList)
             {

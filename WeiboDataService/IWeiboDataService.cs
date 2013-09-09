@@ -10,6 +10,8 @@ namespace Weibo.DataAccess
     interface IWeiboDataService
     {
         IList<WeiboData> GetData();
-
+        bool InsertData(WeiboData addData);
+        bool DeleteData(long weiboID);
+        bool UpdateData(WeiboData updateData);
     }
 }
