@@ -122,6 +122,7 @@ namespace ReadSQL
         {
             Console.WriteLine("Do you want to quit? Y/N");
             string input2 = Console.ReadLine();
+
             if (input2 == "Y" || input2 == "y")
             {
 

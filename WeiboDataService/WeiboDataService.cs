@@ -114,34 +114,7 @@ namespace Weibo.DataAccess
             Connection.Dispose();
             return weiboDataList;
         }
-        public IList<WeiboData> GetData2() //old method
-        {
-            
-            List<WeiboData> weiboDataList = new List<WeiboData>();
 
-            if (ConnectServer())
-            {
-                SqlCommand command = new SqlCommand(QueryString, Connection);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    WeiboData currentData = new WeiboData();
-                    currentData.weiboID = int.Parse(reader[0].ToString());
-                    currentData.WeiboDescription = reader[1].ToString();
-                    currentData.ImageUrl = reader[2].ToString();
-                    currentData.CreatedBy = reader[3].ToString();
-                    currentData.CreatedOn = Convert.ToDateTime(reader[4]);
-                    currentData.LikeRate = int.Parse(reader[5].ToString());
-                    weiboDataList.Add(currentData);
-                }
-                reader.Close();
-            }
-            Connection.Close();
-            Connection.Dispose();
-            return weiboDataList;
-
-        }
         public bool InsertData(WeiboData addData)
         {
            
