@@ -7,7 +7,7 @@ using DataModel;
 
 namespace Weibo.DataAccess
 {
-    interface IWeiboDataService
+    public interface IWeiboDataService
     {
         IList<WeiboData> GetData();
         bool InsertData(WeiboData addData);

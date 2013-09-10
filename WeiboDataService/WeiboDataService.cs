@@ -44,6 +44,7 @@ namespace Weibo.DataAccess
                 }
             }
         }
+
         private void CommandAddParameter(SqlCommand command, WeiboData data, params SqlParameter[] additionalParams)
         {
             foreach (var sqlParam in ConstructParams(data))
