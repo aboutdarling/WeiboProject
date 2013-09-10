@@ -44,7 +44,6 @@ namespace Weibo.DataAccess
                 }
             }
         }
-
         private void CommandAddParameter(SqlCommand command, WeiboData data, params SqlParameter[] additionalParams)
         {
             foreach (var sqlParam in ConstructParams(data))
@@ -76,11 +75,12 @@ namespace Weibo.DataAccess
         {
             var sqlParam = new SqlParameter
                 {
+                    
                     ParameterName = name,
                     SqlDbType = type,
                     Direction = parameterDirection
                 };
-
+            
             if (size != -1) sqlParam.Size = size;
             if (value != null) sqlParam.Value = value;
 
@@ -91,6 +91,7 @@ namespace Weibo.DataAccess
         {
             if (command.ExecuteNonQuery() <= 0)
             {
+                
                 Connection.Close();
                 Connection.Dispose();
                 return false;
