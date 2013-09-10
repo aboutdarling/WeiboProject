@@ -15,7 +15,7 @@ namespace ReadSQL
 {
     class Program
     {
-        private static IWeiboDataService dataModel = new WeiboDataService();
+        private static IWeiboDataService dataService = new WeiboDataService();
         private static void OutputData(IList<WeiboData> weiboDataList)
         {
             foreach (var weiboData in weiboDataList)
@@ -51,7 +51,7 @@ namespace ReadSQL
         private static bool AddData()
         {
      
-            if (dataModel.InsertData(GetInputData()))
+            if (dataService.InsertData(GetInputData()))
             {
                 Console.WriteLine("add data succeed");
                 return true;
@@ -70,7 +70,7 @@ namespace ReadSQL
             if (long.TryParse(Console.ReadLine(), out checkdata))
             {
                 myData.weiboID = checkdata;
-                if (dataModel.DeleteData(myData.weiboID))
+                if (dataService.DeleteData(myData.weiboID))
                 {
                     Console.WriteLine("delete success");
                     return true;
@@ -98,7 +98,7 @@ namespace ReadSQL
             {
                 myData = GetInputData();
                 myData.weiboID = checkdata;
-                if (dataModel.UpdateData(myData))
+                if (dataService.UpdateData(myData))
                 {
                     Console.WriteLine("Update success");
                     return true;
@@ -132,7 +132,7 @@ namespace ReadSQL
         private static void ExecuteInput()
         {
 
-            var weiboDataList = dataModel.GetData();
+            var weiboDataList = dataService.GetData();
             Console.WriteLine("What do you want to do? Search Data/Add Data/Delete Data/Update Data?\nPlease input S/A/D/U");
             string userInput = Console.ReadLine();
             switch (userInput)
@@ -144,11 +144,11 @@ namespace ReadSQL
                     AddData();
                     break;
                 case "S":
-                    weiboDataList = dataModel.GetData();
+                    weiboDataList = dataService.GetData();
                     OutputData(weiboDataList);
                     break;
                 case "s":
-                    weiboDataList = dataModel.GetData();
+                    weiboDataList = dataService.GetData();
                     OutputData(weiboDataList);
                     break;
                 case "D":

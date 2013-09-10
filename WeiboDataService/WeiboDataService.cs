@@ -54,7 +54,10 @@ namespace Weibo.DataAccess
             command.Parameters.Add("@createdBy", SqlDbType.NVarChar, 40).Value = data.CreatedBy;
             command.Parameters.Add("@createdOn", SqlDbType.DateTime).Value = data.CreatedOn;
             command.Parameters.Add("@likerate", SqlDbType.Int).Value = data.LikeRate;
+   
+
         }
+        
         private bool ExecuteQuery(SqlCommand command)
         {
             if (command.ExecuteNonQuery() <= 0)
@@ -86,13 +89,20 @@ namespace Weibo.DataAccess
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
+                    int readerID = reader.GetOrdinal("weiboID");
+                    int readerDescription = reader.GetOrdinal("weiboDescription");
+                    int readerUrl = reader.GetOrdinal("imageUrl");
+                    int readerCreatedBy = reader.GetOrdinal("CreatedBy");
+                    int readerCreatedOn = reader.GetOrdinal("CreatedOn");
+                    int readerlikeRate = reader.GetOrdinal("likerate");
+
                     WeiboData currentData = new WeiboData();
-                    currentData.weiboID = int.Parse(reader[0].ToString());
-                    currentData.WeiboDescription = reader[1].ToString();
-                    currentData.ImageUrl = reader[2].ToString();
-                    currentData.CreatedBy = reader[3].ToString();
-                    currentData.CreatedOn = Convert.ToDateTime(reader[4]);
-                    currentData.LikeRate = int.Parse(reader[5].ToString());
+                    currentData.weiboID = (long)(reader[readerID]);
+                    currentData.WeiboDescription = reader[readerDescription] as string;
+                    currentData.ImageUrl = reader[readerUrl] as string;
+                    currentData.CreatedBy = reader[readerCreatedBy] as string;
+                    currentData.CreatedOn = Convert.ToDateTime(reader[readerCreatedOn]);
+                    currentData.LikeRate = (int)(reader[readerlikeRate]);
                     weiboDataList.Add(currentData);
                 }
                 reader.Close();
