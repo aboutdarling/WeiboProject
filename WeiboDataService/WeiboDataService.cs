@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -47,14 +44,48 @@ namespace Weibo.DataAccess
                 }
             }
         }
-        private void CommandAddParameter(SqlCommand command, WeiboData data)
+        private void CommandAddParameter(SqlCommand command, WeiboData data, params SqlParameter[] additionalParams)
         {
-            command.Parameters.Add("@weiboDescription", SqlDbType.NVarChar, 140).Value = data.WeiboDescription;
-            command.Parameters.Add("@imageUrl", SqlDbType.NVarChar, 380).Value = data.ImageUrl;
-            command.Parameters.Add("@createdBy", SqlDbType.NVarChar, 40).Value = data.CreatedBy;
-            command.Parameters.Add("@createdOn", SqlDbType.DateTime).Value = data.CreatedOn;
-            command.Parameters.Add("@likerate", SqlDbType.Int).Value = data.LikeRate;
+            foreach (var sqlParam in ConstructParams(data))
+            {
+                command.Parameters.Add(sqlParam);
+            }
+
+            foreach (var sqlParam in additionalParams)
+            {
+                command.Parameters.Add(sqlParam);
+            }
         }
+
+        private IEnumerable<SqlParameter> ConstructParams(WeiboData data)
+        {
+            var sqlParams = new List<SqlParameter> () {
+                ConstructSqlParameter("@weiboDescription", SqlDbType.NVarChar, data.WeiboDescription, 140),
+                ConstructSqlParameter("@imageUrl", SqlDbType.NVarChar, data.ImageUrl, 380),
+                ConstructSqlParameter("@createdBy", SqlDbType.NVarChar, data.CreatedBy, 40),
+                ConstructSqlParameter("@createdOn", SqlDbType.DateTime, data.CreatedOn),
+                ConstructSqlParameter("@likerate", SqlDbType.Int, data.LikeRate)
+            };
+
+            return sqlParams;
+        }
+
+        private static SqlParameter ConstructSqlParameter(string name, SqlDbType type, object value = null, 
+            int size = -1, ParameterDirection parameterDirection = ParameterDirection.Input)
+        {
+            var sqlParam = new SqlParameter
+                {
+                    ParameterName = name,
+                    SqlDbType = type,
+                    Direction = parameterDirection
+                };
+
+            if (size != -1) sqlParam.Size = size;
+            if (value != null) sqlParam.Value = value;
+
+            return sqlParam;
+        }
+
         private bool ExecuteQuery(SqlCommand command)
         {
             if (command.ExecuteNonQuery() <= 0)
@@ -103,50 +134,48 @@ namespace Weibo.DataAccess
         }
         public bool InsertData(WeiboData addData)
         {
-           
             if (ConnectServer())
             {
-                SqlCommand command = new SqlCommand(InsertProcedureName, Connection);
-                command.CommandType = CommandType.StoredProcedure;
-                CommandAddParameter(command, addData);
-                command.Parameters.Add("@weiboID", SqlDbType.BigInt).Direction = ParameterDirection.Output;
+                var command = new SqlCommand(InsertProcedureName, Connection)
+                    {CommandType = CommandType.StoredProcedure};
+                CommandAddParameter(command, addData, 
+                    ConstructSqlParameter("@weiboID", SqlDbType.BigInt, null, -1, ParameterDirection.Output));
 
                 return ExecuteQuery(command);      
             }
-            else
-            {
-                return false;
-            }
-
+            
+            return false;
         }
+
         public bool DeleteData(long weiboID)
         {
             if (ConnectServer())
             {
-                SqlCommand command = new SqlCommand(DeleteProcedureName, Connection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@weiboID", SqlDbType.BigInt).Value = weiboID;
+                var command = new SqlCommand(DeleteProcedureName, Connection)
+                    {CommandType = CommandType.StoredProcedure};
+                command.Parameters.Add(ConstructSqlParameter("@weiboID", SqlDbType.BigInt, weiboID));
                 return ExecuteQuery(command);            
 
             }
-            else
-            { return false; }
+            
+            return false;
         }
+
         public bool UpdateData(WeiboData updateData)
         {
             if (ConnectServer())
             {
-                SqlCommand command = new SqlCommand(UpdateProcedureName, Connection);
-                command.CommandType = CommandType.StoredProcedure;
-                CommandAddParameter(command, updateData);
-                command.Parameters.Add("@weiboID", SqlDbType.BigInt).Value = updateData.weiboID;
+                var command = new SqlCommand(UpdateProcedureName, Connection)
+                    {CommandType = CommandType.StoredProcedure};
+                CommandAddParameter(command, updateData,
+                    ConstructSqlParameter("@weiboID", SqlDbType.BigInt, updateData.weiboID));
               
                 return ExecuteQuery(command);      
             }
-            else
-            { return false; }
-
+            
+            return false;
         }
+
         #endregion
     }
 }
