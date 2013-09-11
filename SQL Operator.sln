@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadSQL", "ReadSQL\ReadSQL.csproj", "{5DB8FBB3-4560-4F6A-BA80-14D8252BB3D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{E15B93D1-067C-4C82-8D02-9E2D24C081A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiboDataService", "WeiboDataService\WeiboDataService.csproj", "{A2A3D488-FA1A-42AC-87F8-A00C945BAB9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP", "ASP\ASP.csproj", "{0B4F3F46-00E7-4A0B-96BE-766BF970B8C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{A2A3D488-FA1A-42AC-87F8-A00C945BAB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2A3D488-FA1A-42AC-87F8-A00C945BAB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2A3D488-FA1A-42AC-87F8-A00C945BAB9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B4F3F46-00E7-4A0B-96BE-766BF970B8C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B4F3F46-00E7-4A0B-96BE-766BF970B8C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B4F3F46-00E7-4A0B-96BE-766BF970B8C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B4F3F46-00E7-4A0B-96BE-766BF970B8C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
