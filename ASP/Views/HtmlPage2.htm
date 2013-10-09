@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="../Scripts/myjQuery%20default%20test.js" type="text/javascript"></script>
     <title style="font-family: 'Spirax', cursive;">"Qing's Weibo"</title>
     <link href='http://fonts.googleapis.com/css?family=Spirax' rel='stylesheet'/>
-    
     <style>
         h1
         {
@@ -16,7 +16,7 @@
             color:#000000;
             margin-bottom:6px;
             font-size: medium;
-	    font-family:'Segoe UI';
+	        font-family:'Segoe UI';
         }
         .entry-title
         {
@@ -40,10 +40,10 @@
             color:coral;
             font-style:initial;
         }
-        ul li:nth-child(odd)
+        /*ul li:nth-child(odd)
         {
             background-color: #ffd800;
-        }
+        }*/
         /*ul div:nth-of-type(odd)
         {
             background-color: #d5c1ff;
@@ -55,6 +55,16 @@
         ul li a
         {
            color:#f00;
+        }
+        .sidebar
+        {
+            float: left;
+            width: 170px;
+            margin-top: 30px;
+            list-style-type:none;
+            padding-left:10px;
+            margin-left:5px;
+            border-bottom:1px dashed coral;
         }
         /*input:required
         {
@@ -71,11 +81,11 @@
         }
     </style>
 </head>
-<body  >
+<body id="theBody" >
 
     <h1 id="weibo" class="entry-title" aria-readonly="True" style="font-family: 'Spirax', cursive; font-size:x-large; ">Qing&#39;s Weibo</h1>
-    <
-     <ul  style="width:200px; background-color:#755e5e;align-items:center" >
+&nbsp;
+    <ul  class="sidebar" style="width:200px; background-color:#755e5e;align-items:center" >
 
        <li>
            My Weibo
@@ -89,11 +99,11 @@
        </li>
 
    </ul>
-   <ul style="width:1000px; background-color:#f7b4b4;align-items:center;margin-left:300px">
-     <div novalidate>
+   <article style="width:1000px; background-color:#f7b4b4;align-items:center;margin-left:300px">
+     <div >
         <label style="margin-top:50px auto"> Search:</label>
         <input type ="search" id ="Search" name =" search" autofocus />
-        <input type ="submit" value =" Go!" style="width: 67px" />
+        <input type ="submit" value =" Go!" style="width: 75px" />
          <div> &nbsp;</div>
     </div>
     <div>
@@ -101,70 +111,109 @@
             <label for="new description">分享我的新鲜事：</label>
 
             <div>
-            <input  type="text" id="desc" name="desc" placeholder="share my story" required aria-multiline="True" /><br />
-                <input type="button" value="发布"
+                <input type="text" id="author" name="author" placeholder="your name" style="margin-left:10px" /><br />
+                <input type="text" id="desc" name="desc" placeholder="share my story" required aria-multiline="True" style="margin-left:10px;margin-top:5px;"/><br />
+                <input type="button" value="发布" onclick="clickPublishWeibo()" style="width: 75px;margin-left:10px;"/>
+            </div>
+         </div>
+     </div>
+    <div>
+        <script>
+            //function applyToAll(F, C) {
+            //    for (var i in C)
+            //        F(C[i]);
+            //}
+            //function sumAll2(someArray) {
+            //    var temp = 0.0;
+            //    applyToAll(function addToTemp(e) { temp += e; }, someArray);
+            //    return temp;
+            //}
+            //function alertAll(someArray)
+            //{ applyToAll(alert, someArray); }
+            //var someArray = [10, 20, 30, 40, 50];
+            //for (var i in someArray)
+            //    document.write(someArray[i]);
+            //document.write(sumAll2(someArray));
+            //alertAll(someArray);
+       
+        </script>
+    </div>
+    <section id="container">
+        <div>
+            <h2>读书以养气质</h2>
+            <div style="width:300px; text-align:center" >  
+            <article  id="des" >【职业发展三大阶段】1）23~28岁：水涨船高的阶段，最为重要的是专业化能力；2）28~32岁：从被管理变成管理的阶段，开始领悟学高为师，身正为范；3）32~37岁：要考虑能否更好独当一面，拿捏进退；4）第一个五年做专业，第二个五年做管理，第三个五年做经营。<br />
+            </article> 
+            </div>      
+                     
+            <img src ="http://ww2.sinaimg.cn/thumbnail/bd5b6115jw1e8ktfayeaaj20ks0e73zt.jpg" />
+            <table class="date">
+                <td>Date:</td>
+                <td style="width:150px"> 2013-9-11</td>
+                <td>Like:</td>
+                <td style="width:150px"> 
+            <script>
+            x = 5
+            document.write(x);
+            </script>
+             </td>
+             </table>
+        </div>
+        <div>
+            <h2>窍门百科</h2>        
+            <article style="width:400px" id="Div1" >【不花钱的防癌法】①每天走路一小时，降低一半患大肠癌的几率；②饭后散步30分钟，患胰腺癌的风险减少一半；③干毛巾反复摩擦整个背部10分钟；④每天开窗半个小时，排出室内甲醛、氡等致癌物；⑤每天晒15分钟太阳，可降低乳腺癌、结肠癌、前列腺癌、卵巢癌及胃癌的风险；⑥保证睡眠，预防乳腺癌。<br />
+            </article> 
+                     
+            <img src ="http://ww1.sinaimg.cn/thumbnail/91907363jw1e8kkgc6ae6j203c027dfm.jpg" />
+              <table class="date">
+                <td>Date:</td>
+                <td style="width:150px"> 2013-9-12</td>
+                <td>Like:</td>
+                <td style="width:150px"> 4</td>
+                </table>  
+        <div>
+            <h2>星陨Starfal</h2>        
+            <article style="width:400px" id="Div2" >I kinda have a thing for you.<br />
+            </article> 
+                     
+            <img src ="http://ww4.sinaimg.cn/thumbnail/48847b64jw1e8ksitmqsoj20b407tq39.jpg" />
+            <table class="date">
+                <td>Date:</td>
+                <td style="width:150px"> 2013-9-12</td>
+                <td>Like:</td>
+                <td style="width:150px"> 3</td>
+                </table>    </div>
+        <div>
+            <h2>华尔街日报中文网</h2>        
+            <article style="width:400px" id="Div3" >【房产图片：抵御空气污染的香港公寓】- 对饱受雾霾困扰的城市居民来说，这套极简主义风格香港公寓提供了一个避风港。它配备了先进的空气净化器，遍布绿色植物，将健康生活融入82平米的空间。它目前以约合人民币918万的要价待售。<br />
+            </article> 
+                     
+            <img src ="http://ww2.sinaimg.cn/square/7f0b4796gw1e8iu0ja5nfj20c8085gmr.jpg" />
+             <table class="date">
+                <td>Date:</td>
+                <td style="width:150px"> 2013-9-11</td>
+                <td>Like:</td>
+                <td style="width:150px"> 1</td>
+                </table>
+        </div>
+    </div>
+    </section>
 
-
-    </div style="width: 75px">
-    <div>
-        <h2>读书以养气质</h2>
-        <div style="width:300px; text-align:center" >  
-        <article  id="des" >【职业发展三大阶段】1）23~28岁：水涨船高的阶段，最为重要的是专业化能力；2）28~32岁：从被管理变成管理的阶段，开始领悟学高为师，身正为范；3）32~37岁：要考虑能否更好独当一面，拿捏进退；4）第一个五年做专业，第二个五年做管理，第三个五年做经营。<br />
-        </article> 
-        </div>      
-                     
-        <img src ="http://ww2.sinaimg.cn/thumbnail/bd5b6115jw1e8ktfayeaaj20ks0e73zt.jpg" />
-        <table class="date">
-            <td>Date:</td>
-            <td style="width:150px"> 2013-9-11</td>
-            <td>Like:</td>
-            <td style="width:150px"> 1</td>
-            </table>
-    </div>
-    <div>
-        <h2>窍门百科</h2>        
-        <article style="width:400px" id="Div1" >【不花钱的防癌法】①每天走路一小时，降低一半患大肠癌的几率；②饭后散步30分钟，患胰腺癌的风险减少一半；③干毛巾反复摩擦整个背部10分钟；④每天开窗半个小时，排出室内甲醛、氡等致癌物；⑤每天晒15分钟太阳，可降低乳腺癌、结肠癌、前列腺癌、卵巢癌及胃癌的风险；⑥保证睡眠，预防乳腺癌。<br />
-        </article> 
-                     
-        <img src ="http://ww1.sinaimg.cn/thumbnail/91907363jw1e8kkgc6ae6j203c027dfm.jpg" />
-          <table class="date">
-            <td>Date:</td>
-            <td style="width:150px"> 2013-9-12</td>
-            <td>Like:</td>
-            <td style="width:150px"> 4</td>
-            </table>  
-    <div>
-        <h2>星陨Starfal</h2>        
-        <article style="width:400px" id="Div2" >I kinda have a thing for you.<br />
-        </article> 
-                     
-        <img src ="http://ww4.sinaimg.cn/thumbnail/48847b64jw1e8ksitmqsoj20b407tq39.jpg" />
-        <table class="date">
-            <td>Date:</td>
-            <td style="width:150px"> 2013-9-12</td>
-            <td>Like:</td>
-            <td style="width:150px"> 3</td>
-            </table>    </div>
-    <div>
-        <h2>华尔街日报中文网</h2>        
-        <article style="width:400px" id="Div3" >【房产图片：抵御空气污染的香港公寓】- 对饱受雾霾困扰的城市居民来说，这套极简主义风格香港公寓提供了一个避风港。它配备了先进的空气净化器，遍布绿色植物，将健康生活融入82平米的空间。它目前以约合人民币918万的要价待售。<br />
-        </article> 
-                     
-        <img src ="http://ww2.sinaimg.cn/square/7f0b4796gw1e8iu0ja5nfj20c8085gmr.jpg" />
-         <table class="date">
-            <td>Date:</td>
-            <td style="width:150px"> 2013-9-11</td>
-            <td>Like:</td>
-            <td style="width:150px"> 1</td>
-            </table>
-    </div>
-    <div>
-            <embed src="http://www.tudou.com/v/cYvk-d1ARts/&resourceId=0_05_02_99&tid=0/v.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="480" height="400"></embed>
-        </video>
-    </div>
-</ul>
+</article>
 <footer class="date">
 <p>Copyright 2013 Qing Li</p>
     </footer>
 </body>
 </html>
+
+<script>
+    function clickPublishWeibo() {
+        var cont = document.getElementById("container");
+        var author = document.getElementById("author").value;
+        var desc = document.getElementById("desc").value;
+            
+        cont.innerHTML += desc + "<br />";
+        cont.innerHTML += author + "<br />";
+    }
+
+</script>
